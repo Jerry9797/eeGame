@@ -1,0 +1,494 @@
+
+    [
+        {
+            "type": "constructor",
+            "inputs":
+            [
+                {
+                    "name": "tokenAddresses",
+                    "type": "address[]",
+                    "internalType": "address[]"
+                },
+                {
+                    "name": "priceFeedAddresses",
+                    "type": "address[]",
+                    "internalType": "address[]"
+                },
+                {
+                    "name": "d711Address",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "burnD711",
+            "inputs":
+            [
+                {
+                    "name": "amountD711ToBurn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "depositCollateral",
+            "inputs":
+            [
+                {
+                    "name": "tokenCollateralAddress",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amountCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "depositCollateralAndMintD711",
+            "inputs":
+            [
+                {
+                    "name": "tokenCollateralAddress",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amountCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "amountD711ToMint",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "forceLiquidate",
+            "inputs":
+            [],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "getAccountCollateralValueD711",
+            "inputs":
+            [
+                {
+                    "name": "user",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs":
+            [
+                {
+                    "name": "totCollateralInUsd",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAccountInformation",
+            "inputs":
+            [
+                {
+                    "name": "user",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs":
+            [
+                {
+                    "name": "totalD711Minted",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "collateralValueInUsd",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getAmountWethForMintingD711",
+            "inputs":
+            [
+                {
+                    "name": "wethAddress",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amountD711ToMint",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getHealthFactor",
+            "inputs":
+            [
+                {
+                    "name": "user",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ],
+            "outputs":
+            [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getTokenAmountFromUsd",
+            "inputs":
+            [
+                {
+                    "name": "collateralToken",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "debtToCover",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [
+                {
+                    "name": "tokenAmount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "getUsdValueD711",
+            "inputs":
+            [
+                {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [
+                {
+                    "name": "",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "stateMutability": "view"
+        },
+        {
+            "type": "function",
+            "name": "liquidate",
+            "inputs":
+            [
+                {
+                    "name": "collateralToken",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "user",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "debtToCover",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "mintD711",
+            "inputs":
+            [
+                {
+                    "name": "amountD711",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "redeemCollateral",
+            "inputs":
+            [
+                {
+                    "name": "tokenCollateralAddress",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amountCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "redeemCollateralForD711",
+            "inputs":
+            [
+                {
+                    "name": "tokenCollateralAddress",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amountCollateral",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                },
+                {
+                    "name": "amountD711ToBurn",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "function",
+            "name": "transfer",
+            "inputs":
+            [
+                {
+                    "name": "from",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "to",
+                    "type": "address",
+                    "internalType": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ],
+            "outputs":
+            [],
+            "stateMutability": "nonpayable"
+        },
+        {
+            "type": "event",
+            "name": "CollateralDeposited",
+            "inputs":
+            [
+                {
+                    "name": "user",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "token",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256",
+                    "indexed": true,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "CollateralRedeemed",
+            "inputs":
+            [
+                {
+                    "name": "redeemedFrom",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "redeemedTo",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "token",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                },
+                {
+                    "name": "amount",
+                    "type": "uint256",
+                    "indexed": false,
+                    "internalType": "uint256"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "event",
+            "name": "ForceLiquidate",
+            "inputs":
+            [
+                {
+                    "name": "user",
+                    "type": "address",
+                    "indexed": true,
+                    "internalType": "address"
+                }
+            ],
+            "anonymous": false
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__AmountMustBeMOreThanZero",
+            "inputs":
+            []
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__D711MintFailed",
+            "inputs":
+            []
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__HealthFactorNotImproved",
+            "inputs":
+            [
+                {
+                    "name": "healthFactorValue",
+                    "type": "uint256",
+                    "internalType": "uint256"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__HealthFactorOk",
+            "inputs":
+            []
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__NotAllowToken",
+            "inputs":
+            [
+                {
+                    "name": "token",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__TheHealthFactorBroken",
+            "inputs":
+            [
+                {
+                    "name": "user",
+                    "type": "address",
+                    "internalType": "address"
+                }
+            ]
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__TokenAddressesAndPriceFeedAddressesMustBeSameLength",
+            "inputs":
+            []
+        },
+        {
+            "type": "error",
+            "name": "D711Engine__TransferFailed",
+            "inputs":
+            []
+        },
+        {
+            "type": "error",
+            "name": "ReentrancyGuardReentrantCall",
+            "inputs":
+            []
+        }
+    ]
