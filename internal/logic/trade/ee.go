@@ -3,8 +3,7 @@ package trade
 import (
 	"context"
 	"crypto/ecdsa"
-	"eeGame/internal/logic/trade/contract"
-	"eeGame/internal/logic/trade/contract_ meta"
+	"eeGame/internal/logic/trade/contract_meta"
 	"eeGame/utility/response"
 	"fmt"
 	"github.com/ethereum/go-ethereum"
@@ -23,9 +22,9 @@ import (
 type Ee struct {
 	client                *ethclient.Client
 	wethAddress           common.Address
-	D711Engine            *contract__meta.D711Engine
+	D711Engine            *contract_meta.D711Engine
 	D711EngineAddress     common.Address
-	D711StableCoin        *contract.D711StableCoin
+	D711StableCoin        *contract_meta.D711StableCoin
 	D711StableCoinAddress common.Address
 	fromAddress           common.Address
 	userAddress           common.Address
@@ -46,11 +45,11 @@ func NewEe(ctx context.Context) (*Ee, error) {
 	d711StableCoinAddress := common.HexToAddress(cfg["d711StableCoinAddress"].(string))
 	chainId := big.NewInt(11155111)
 
-	d711Engine, err := contract__meta.NewD711Engine(d711EngineAddress, client)
+	d711Engine, err := contract_meta.NewD711Engine(d711EngineAddress, client)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load DSC Engine contract_metadata: %v", err)
 	}
-	d711, err := contract.NewD711StableCoin(d711StableCoinAddress, client)
+	d711, err := contract_meta.NewD711StableCoin(d711StableCoinAddress, client)
 	if err != nil {
 		return nil, fmt.Errorf("failed to load DSC Engine contract_metadata: %v", err)
 	}
@@ -114,7 +113,7 @@ func (t *Ee) getAmountWethForMintingD711(amountD711 *big.Int) (*big.Int, error) 
 func (t *Ee) depositCollateralAndMintD711(nonce uint64, gasFeeCap *big.Int, gasTipCap *big.Int, err error, amountCollateral *big.Int, amountDscToMint *big.Int) error {
 	// 发送交易，抵押&铸币
 	auth := t.createTransactor(nonce, gasFeeCap, gasTipCap)
-	err = t.getGasLimit(auth, t.D711EngineAddress, contract__meta.D711EngineMetaData.ABI, "depositCollateralAndMintD711",
+	err = t.getGasLimit(auth, t.D711EngineAddress, contract_meta.D711EngineMetaData.ABI, "depositCollateralAndMintD711",
 		t.wethAddress, amountCollateral, amountDscToMint)
 	if err != nil {
 		return err
@@ -149,7 +148,7 @@ func (t *Ee) prepareTransaction(ctx context.Context) (nonce uint64, gasFeeCap, g
 }
 
 func (t *Ee) approveWETH(nonce uint64, gasFeeCap, gasTipCap *big.Int, amountCollateral *big.Int) error {
-	weth9, err2 := contract__meta.NewWETH9(t.wethAddress, t.client)
+	weth9, err2 := contract_meta.NewWETH9(t.wethAddress, t.client)
 	if err2 != nil {
 		panic(err2)
 	}
@@ -158,7 +157,7 @@ func (t *Ee) approveWETH(nonce uint64, gasFeeCap, gasTipCap *big.Int, amountColl
 	//		Signer: nil, // 不签名
 	//	}
 	auth := t.createTransactor(nonce, gasFeeCap, gasTipCap)
-	err := t.getGasLimit(auth, t.wethAddress, contract__meta.WETH9MetaData.ABI, "approve", t.D711EngineAddress, amountCollateral)
+	err := t.getGasLimit(auth, t.wethAddress, contract_meta.WETH9MetaData.ABI, "approve", t.D711EngineAddress, amountCollateral)
 	if err != nil {
 		return err
 	}
@@ -256,7 +255,7 @@ func (t *Ee) getBalance() (*big.Int, *big.Int) {
 }
 
 func (t *Ee) GetBalanceERC20(address common.Address) (*big.Int, error) {
-	coin, err := contract.NewD711StableCoin(t.D711StableCoinAddress, t.client)
+	coin, err := contract_meta.NewD711StableCoin(t.D711StableCoinAddress, t.client)
 	if err != nil {
 		return nil, err
 	}
@@ -294,7 +293,7 @@ func (t *Ee) redeemCollateralForDsc(nonce uint64, gasPrice *big.Int, gasTipPrice
 	}
 
 	auth := t.createTransactor(nonce, gasPrice, gasTipPrice)
-	err = t.getGasLimit(auth, t.D711EngineAddress, contract__meta.D711EngineMetaData.ABI, "redeemCollateralForD711",
+	err = t.getGasLimit(auth, t.D711EngineAddress, contract_meta.D711EngineMetaData.ABI, "redeemCollateralForD711",
 		t.wethAddress, wethAmount, d711Amount)
 	if err != nil {
 		return err
@@ -315,12 +314,12 @@ func (t *Ee) redeemCollateralForDsc(nonce uint64, gasPrice *big.Int, gasTipPrice
 }
 
 func (t *Ee) approveD711(nonce uint64, gasFeeCap, gasTipPrice *big.Int, d711Amount *big.Int) error {
-	d711Coin, err := contract.NewD711StableCoin(t.D711StableCoinAddress, t.client)
+	d711Coin, err := contract_meta.NewD711StableCoin(t.D711StableCoinAddress, t.client)
 	if err != nil {
 		logrus.Errorf("NewDSC error:%v", err)
 	}
 	auth := t.createTransactor(nonce, gasFeeCap, gasTipPrice)
-	err = t.getGasLimit(auth, t.D711StableCoinAddress, contract.D711StableCoinMetaData.ABI, "approve", t.D711EngineAddress, d711Amount)
+	err = t.getGasLimit(auth, t.D711StableCoinAddress, contract_meta.D711StableCoinMetaData.ABI, "approve", t.D711EngineAddress, d711Amount)
 	if err != nil {
 		return err
 	}

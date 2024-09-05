@@ -3,7 +3,7 @@ package trade
 import (
 	"context"
 	"crypto/ecdsa"
-	"eeGame/internal/logic/trade/contract_ meta"
+	"eeGame/internal/logic/trade/contract_meta"
 	"eeGame/utility/response"
 	"fmt"
 	"github.com/ethereum/go-ethereum"
@@ -20,7 +20,7 @@ import (
 
 type Trade struct {
 	client                *ethclient.Client
-	gameManger            *contract__meta.GameManagement
+	gameManger            *contract_meta.GameManagement
 	chainId               *big.Int
 	privateKey            *ecdsa.PrivateKey
 	publicKey             common.Address
@@ -43,7 +43,7 @@ func NewTrade(ctx context.Context) (*Trade, error) {
 
 	eeStableCoinStr := cfg["d711StableCoinAddress"]
 	eeStableCoinAddress := common.HexToAddress(eeStableCoinStr.(string))
-	gameManger, err := contract__meta.NewGameManagement(eeStableCoinAddress, client)
+	gameManger, err := contract_meta.NewGameManagement(eeStableCoinAddress, client)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +66,7 @@ func (t *Trade) StartGame(ctx context.Context, roomId *big.Int, userAddress []co
 	if err != nil {
 		return err
 	}
-	err = t.gatGasLimit(auth, t.gameManagementAddress, contract__meta.GameManagementMetaData.ABI, "startGame", roomId, userAddress, minQualifiedAmount)
+	err = t.gatGasLimit(auth, t.gameManagementAddress, contract_meta.GameManagementMetaData.ABI, "startGame", roomId, userAddress, minQualifiedAmount)
 	if err != nil {
 		return err
 	}
@@ -87,7 +87,7 @@ func (t *Trade) EndGame(ctx context.Context, roomId *big.Int, winner common.Addr
 	if err != nil {
 		return err
 	}
-	err = t.gatGasLimit(auth, t.gameManagementAddress, contract__meta.GameManagementMetaData.ABI, "endGame", roomId, winner, userAddress, betAmounts)
+	err = t.gatGasLimit(auth, t.gameManagementAddress, contract_meta.GameManagementMetaData.ABI, "endGame", roomId, winner, userAddress, betAmounts)
 	if err != nil {
 		return err
 	}
